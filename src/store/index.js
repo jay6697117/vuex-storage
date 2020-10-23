@@ -1,8 +1,11 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+// import * as Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 // import SecureStorage from "secure-web-storage";
 // import * as CryptoJS from "crypto-js";
-import Vuex from 'vuex';
-import Vue from 'vue';
+
 import user from './user';
 
 Vue.use(Vuex);
@@ -31,13 +34,24 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: 'userLs',
-      paths: ["user"],
+      paths: ['user'],
       storage: window.localStorage
     }),
     createPersistedState({
-      key: "userSs",
-      paths: ["user"],
+      key: 'userSs',
+      paths: ['user'],
       storage: window.sessionStorage
+    }),
+    createPersistedState({
+      key: 'userCs',
+      paths: ['user'],
+      storage: {
+        getItem: key => Cookies.get(key),
+        //new Date(new Date().getTime() + 60 * 1000 * 1) 一分钟后失效
+        setItem: (key, value) =>
+          Cookies.set(key, value, { expires: new Date(new Date().getTime() + 60 * 1000 * 1), secure: false }),
+        removeItem: key => Cookies.remove(key)
+      }
     })
   ],
   modules: {

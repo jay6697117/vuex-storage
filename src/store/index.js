@@ -30,12 +30,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      key: 'userObj1',
+      key: 'userLs',
       paths: ["user"],
       storage: window.localStorage
     }),
     createPersistedState({
-      key: "userObj2",
+      key: "userSs",
       paths: ["user"],
       storage: window.sessionStorage
     })

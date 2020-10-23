@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate';
 // import * as Cookies from 'js-cookie';
 import Cookies from 'js-cookie';
 // import SecureStorage from "secure-web-storage";
+// import CryptoJS from "crypto-js";
 // import * as CryptoJS from "crypto-js";
 
 import user from './user';
@@ -47,9 +48,9 @@ export default new Vuex.Store({
       paths: ['user'],
       storage: {
         getItem: key => Cookies.get(key),
-        //new Date(new Date().getTime() + 60 * 1000 * 1) 十秒后失效
+        //new Date(new Date().getTime() + 60 * 1000 * 1) 二十秒后失效
         setItem: (key, value) =>
-          Cookies.set(key, value, { expires: new Date(new Date().getTime() + 10 * 1000 * 1), secure: false }),
+          Cookies.set(key, value, { expires: new Date(new Date().getTime() + 20 * 1000 * 1), secure: false }),
         removeItem: key => Cookies.remove(key)
       }
     })

@@ -1,6 +1,6 @@
-const state = function () {
+const state = function() {
   return {
-    message: 'ddd'
+    message: ''
   };
 };
 
